@@ -1,0 +1,30 @@
+@import '@/directives/loading/index.scss';
+*{
+  margin: 0;
+  padding: 0;
+}
+$color-primary: #007aff;
+$border-color: #e695ef;
+$btn-color: #dad4ec;
+$font-color: #a878f6; 
+.bg-login {
+  // background-image: linear-gradient(-20deg, #fbfcdb 0%, #e9defa 100%);
+  background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+}
+.bg-color2 {
+  background: #C9CCD3;
+  background-image: linear-gradient(-180deg, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%);
+  background-blend-mode: lighten;
+}
+
+// .bg-color3 {
+//   background-image: linear-gradient(to left, #BDBBBE 0%, #9D9EA3 100%), radial-gradient(88% 271%, rgba(255, 255, 255, 0.25) 0%, rgba(254, 254, 254, 0.25) 1%, rgba(0, 0, 0, 0.25) 100%), radial-gradient(50% 100%, rgba(255, 255, 255, 0.30) 0%, rgba(0, 0, 0, 0.30) 100%);
+//   background-blend-mode: normal, lighten, soft-light;
+// }
+
+.info-login {
+  background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
+  
+}
+
+
