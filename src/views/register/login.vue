@@ -2,7 +2,7 @@
  * @Author: jiangxx 18635949970@163.com
  * @Date: 2022-07-08 15:15:44
  * @LastEditors: jiangxx 18635949970@163.com
- * @LastEditTime: 2022-07-19 15:11:34
+ * @LastEditTime: 2022-07-29 17:24:05
  * @FilePath: \my-vue3-h5\src\views\register\login.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -49,7 +49,12 @@ const login = function() {
         color: '#fff'
     })
   } else if(!password.value) {
-    console.log('请填写密码')
+     that.$toast({
+        value: '请填写密码',
+        duration: 2000, // 如果大于0则不必使用destory方法
+        background: '#000',
+        color: '#fff'
+    })
   } else {
     let putObj = {
       'userName': username.value,
@@ -57,6 +62,7 @@ const login = function() {
     }
     that.$request.post('common.login', putObj).then((res: any) => {
       console.log(res);
+      localStorage.setItem('authorization', JSON.stringify(res.data.token));//将token存储起来
       username.value = ''
       password.value = ''
     })

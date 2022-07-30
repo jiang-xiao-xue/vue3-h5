@@ -2,11 +2,11 @@
  * @Author: jiangxx 18635949970@163.com
  * @Date: 2022-06-28 16:07:51
  * @LastEditors: jiangxx 18635949970@163.com
- * @LastEditTime: 2022-07-09 10:37:57
+ * @LastEditTime: 2022-07-30 11:16:09
  * @FilePath: \my-vue3-h5\src\utils\request.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
-import axios, { AxiosResponse, AxiosRequestConfig, CancelTokenStatic, AxiosInstance } from 'axios';
+import axios, { AxiosResponse, AxiosRequestConfig, CancelTokenStatic, AxiosInstance, AxiosRequestHeaders  } from 'axios';
 import {
   baseURL,
   successCode,
@@ -86,12 +86,21 @@ class MyRequest {
   }
 
   /**
-     * 请求拦截
-     * @protected
-     */
+   * 请求拦截
+   * @protected
+   */
   protected interceptorsRequest (): void {
     this.service.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      (config: AxiosRequestConfig ) => {
+        let token = window.localStorage.getItem('authorization');
+        token = eval('(' + token + ')');
+        // 遇到问题config.headers可能未定义，三种解决办法：
+        // 1、 降低axios版本；2、增加一步对headers的判断；3、进行类型覆盖；
+        // 这里选择第二种方式
+        if ( token && config && config.headers) {
+          config.headers.authorization = token;
+          console.log(config.headers)
+        }
         const keyOfRequest = this.getKeyOfRequest(config)
         this.removePending(keyOfRequest, true)
         config.cancelToken = new this.CancelToken((c: any) => {
@@ -114,7 +123,7 @@ class MyRequest {
      * @protected
      */
   protected interceptorsResponse (): void {
-    this.service.interceptors.response.use((response: AxiosResponse) => {
+      this.service.interceptors.response.use((response: AxiosResponse) => {
       return this.handleResponse(response)
     }, error => {
       const { response } = error
@@ -129,7 +138,8 @@ class MyRequest {
   protected handleResponse (response: AxiosResponse): Promise<AxiosResponse<any>> {
     this.responseLog(response)
     this.removePending(this.getKeyOfRequest(response.config))
-    const { data, status, config, statusText } = response
+    const { data, status, config, statusText } = response;
+    
     let code = data && data[statusName]
       ? data[statusName]
       : status

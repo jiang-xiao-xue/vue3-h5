@@ -2,7 +2,7 @@
  * @Author: jiangxx 18635949970@163.com
  * @Date: 2022-06-22 10:16:01
  * @LastEditors: jiangxx 18635949970@163.com
- * @LastEditTime: 2022-06-28 14:42:17
+ * @LastEditTime: 2022-07-29 14:42:15
  * @FilePath: \my-vue3-h5\README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -35,4 +35,13 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
   const that = ctx.$.appContext.config.globalProperties;
 ```
 
-- 跨域不用设置baseurl
+- 跨域不用设置baseurl;
+
+### 零碎知识点
+
+- token 放在cookie中会引起CSRF攻击；
+
+- CSRF攻击的本质是应用了cookie在表单提交与标签src会自动携带的特点。请求拦截是针对axios发起的请求，CSRF攻击不通过XHHR请求发起，
+  所以拦截修改请求头是没有用的，token放在cookie中不安全等同于公开，如果想放入cookie中需要设置samesite属性。
+
+- 需要进行转义过滤预防xss注入
