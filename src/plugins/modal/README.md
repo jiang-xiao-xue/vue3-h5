@@ -1,41 +1,18 @@
 <!--
  * @Author: jiangxx 18635949970@163.com
- * @Date: 2022-07-08 15:27:27
+ * @Date: 2022-08-05 14:50:22
  * @LastEditors: jiangxx 18635949970@163.com
- * @LastEditTime: 2022-08-05 17:05:14
- * @FilePath: \my-vue3-h5\src\views\home.vue
+ * @LastEditTime: 2022-08-05 17:03:57
+ * @FilePath: \vue3-h5\src\plugins\modal\README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
-<template>
-  <div>home</div>
-  <!-- <div @click="handle" v-authbtn="'user-test1'">test</div> -->
-  <div @click="handle" class="btn">APi调用测试</div>
-  <div @click="handle1" class="btn">标签调用测试</div>
-  <div @click="handle2" class="btn">h函数调用测试</div>
-  <div @click="handle3" class="btn">jsx函数调用测试</div>
-  <r-modal v-model="show"
-           title="演示-提交表单"
-           close
-           mask-close
-           :opacity="0.3"
-           :loading="loading"
-           @on-confirm="handleConfirm">
-           <input type="text">
-  </r-modal>
-</template>
+### API 调用方式
 
-<script lang="tsx" setup>
-import { ref, onMounted, getCurrentInstance } from 'vue'
-import useGlobal from '@/hooks/useGlobal/index';
-const { ctx } = getCurrentInstance();
-const that = ctx.$.appContext.config.globalProperties;
-const { $modal } = useGlobal();
-const loading = ref<boolean>(false);
-const show = ref<boolean>(false);
-const handle = (() => {
-  // that.$request.get('common.user').then((res: any) => {
-  //     console.log(res);
-  //   })
+(```)
+ <div @click="handle" class="btn">APi调用测试</div>
+ import useGlobal from '@/hooks/useGlobal/index';
+ const { $modal } = useGlobal();
+ const handle = (() => {
   // API调用
    $modal.show({
       title: '演示',
@@ -51,13 +28,36 @@ const handle = (() => {
       }
     });
 })
+(```)
+
+###  HTML内标签方式
+
+(```)
+<div @click="handle1" class="btn">标签调用测试</div>
+<r-modal v-model="show"
+           title="演示-提交表单"
+           close
+           mask-close
+           :opacity="0.3"
+           :loading="loading"
+           @on-confirm="handleConfirm">
+           <input type="text">
+</r-modal>
+import { ref } from 'vue'
+const loading = ref<boolean>(false);
+const show = ref<boolean>(false);
 const handle1 = () => {
   show.value = true;
 }
 const handleConfirm = () => {
   show.value = false;
 }
+(```)
 
+### h函数调用方式
+
+(```)
+<div @click="handle2" class="btn">h函数调用测试</div>
 const handle2 = () =>{
   $modal.show({
         title: '演示-API调用弹框',
@@ -73,6 +73,19 @@ const handle2 = () =>{
         }
       });
 }
+(```)
+
+### jsx语法调用方式
+- 注意：使用jsx语法之前需要在vite中下载并使用对应插件（在vite.config.ts中）
+(```)
+// 引入插件
+import vueJsx from '@vitejs/plugin-vue-jsx'
+plugins: [
+      vue(),
+      vueJsx()
+],
+
+<div @click="handle3" class="btn">jsx函数调用测试</div>
 
 const handle3 = () => {
   $modal.show({
@@ -89,12 +102,4 @@ const handle3 = () => {
       });
 }
 
-</script>
-<style scoped lang="scss">
-.btn {
-  width: 50px;
-  height: 30px;
-  background: #000;
-  color: #fff;
-}
-</style>
+(```)

@@ -2,7 +2,7 @@
  * @Author: jiangxx 18635949970@163.com
  * @Date: 2022-06-22 10:23:45
  * @LastEditors: jiangxx 18635949970@163.com
- * @LastEditTime: 2022-08-01 11:59:43
+ * @LastEditTime: 2022-08-03 12:02:40
  * @FilePath: \my-vue3-h5\src\router\index.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -46,9 +46,11 @@ const getRouterArr = (type: String) => {
 }
 
 router.beforeEach((to, _from, next) => {
+  let token = window.localStorage.getItem('authorization');
+  token = eval('(' + token + ')');
   if (to.meta && to.meta.roleCode) {
     let needCode = to.meta.roleCode as string;
-    if (getRouterArr('Admin')!.indexOf(needCode) > -1) {
+    if (getRouterArr('Admin')!.indexOf(needCode) > -1 && token) {
       next();
     } else {
       next('/login');

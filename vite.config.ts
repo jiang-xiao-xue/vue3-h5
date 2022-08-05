@@ -2,7 +2,7 @@
  * @Author: jiangxx 18635949970@163.com
  * @Date: 2022-06-22 10:16:01
  * @LastEditors: jiangxx 18635949970@163.com
- * @LastEditTime: 2022-06-29 15:20:17
+ * @LastEditTime: 2022-08-05 17:01:09
  * @FilePath: \my-vue3-h5\vite.config.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -12,9 +12,13 @@
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 export default({ command, mode }) => {
   return defineConfig({
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      vueJsx()
+    ],
     resolve: {
       alias: {
         '@': resolve('./src')
