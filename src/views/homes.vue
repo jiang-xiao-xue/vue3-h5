@@ -101,14 +101,14 @@ import { Swiper, SwiperSlide } from 'swiper/vue'; // swiper所需组件
 // 这是分页器和对应方法，swiper好像在6的时候就已经分离了分页器和一些其他工具
 import {Pagination,A11y, Autoplay } from 'swiper';
 import { reactive, ref, Ref, onMounted, getCurrentInstance } from 'vue'
-import $  from 'jquery'
+// import $  from 'jquery'
 
 // 对应css 如果使用less或者css只需要把scss改为对应的即可
 import 'swiper/scss';
 import 'swiper/scss/pagination';
 import Footer from '@/components/footer.vue'
 import Menu from '@/components/menu.vue'
-const { ctx } = getCurrentInstance();
+const { ctx } = getCurrentInstance() as any;
 const that = ctx.$.appContext.config.globalProperties;
 const onSwiper = (swiper: any) => {
     console.log(swiper);

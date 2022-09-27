@@ -25,7 +25,7 @@ interface IModalParams {
   close?: boolean;
   maskClose?: boolean;
   opacity?: number;
-  onConfirm?: () => Promise<void> | void;
+  onConfirm?: () => Promise<undefined> | undefined;
   onCancel?: () => void;
 }
 interface IModal {

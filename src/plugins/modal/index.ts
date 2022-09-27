@@ -2,7 +2,7 @@
  * @Author: jiangxx 18635949970@163.com
  * @Date: 2022-08-04 15:39:08
  * @LastEditors: jiangxx 18635949970@163.com
- * @LastEditTime: 2022-08-05 14:40:03
+ * @LastEditTime: 2022-09-27 15:00:51
  * @FilePath: \vue3-h5\src\plugins\modal\index.ts
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -53,7 +53,7 @@ Modal.install = (app: App, options: IConfig = {}) => {
         async 'on-confirm'() {
           if (onConfirm) {
             const fn = onConfirm();
-            if (fn && fn.then) {
+            if (fn && await fn.then()) {
               try {
                 props.loading = true;
                 await fn;

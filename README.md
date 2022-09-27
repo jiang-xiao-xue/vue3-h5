@@ -2,7 +2,7 @@
  * @Author: jiangxx 18635949970@163.com
  * @Date: 2022-06-22 10:16:01
  * @LastEditors: jiangxx 18635949970@163.com
- * @LastEditTime: 2022-07-29 14:42:15
+ * @LastEditTime: 2022-09-27 14:52:33
  * @FilePath: \my-vue3-h5\README.md
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -45,3 +45,10 @@ Since TypeScript cannot handle type information for `.vue` imports, they are shi
   所以拦截修改请求头是没有用的，token放在cookie中不安全等同于公开，如果想放入cookie中需要设置samesite属性。
 
 - 需要进行转义过滤预防xss注入
+
+http2提供了复用连接的能力 http3提供了缓存的能力
+
+可伸缩布局方案的库 lib-flexible
+
+width: min-content max-content fit-content
+type与interface的区别之一就是interface不能拓展extend的联合类型
